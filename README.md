@@ -1,4 +1,4 @@
-# DWM-Terminal (`dwmterm`)
+# Fork of [dwmterm](github.com/Abs313a/dwmterm) that adds window class override
 
 <p align="center">
   <strong>An ultra-minimal, sub-millisecond latency CPU-framebuffer terminal engineered for dynamic window managers, Suckless <code>dwm</code>, and <a href="https://github.com/ChrisTitusTech/dwm-titus"><code>dwm-titus</code></a>.</strong>
