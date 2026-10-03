@@ -81,7 +81,7 @@ sudo dnf install gcc make pkgconf-pkg-config libX11-devel libXext-devel freetype
 ### 2. Build & Install
 
 ```bash
-git clone https://github.com/Abs313a/dwmterm.git
+git clone https://github.com/damien1141/dwmterm.git
 cd dwmterm
 make
 sudo make install
@@ -237,6 +237,7 @@ font_family = MesloLGS Nerd Font
 * `font_size` (`-s, --font-size <pt>`): Font size in points (6–72, default: 12), scaled automatically to match display DPI.
 * `font_family` (`-f, --font <family>`): Primary font family name with strict monospace fallback cascade.
 * `padding` (`-p, --padding <px>`): Uniform internal window margin in pixels (0–100, default: 12).
+* `-c, --class <name>` (`-c, --class <name>`): Set window class and instance name.
 * `padding_x` / `window-padding-x`: Independent horizontal window margin in pixels.
 * `padding_y` / `window-padding-y`: Independent vertical window margin in pixels.
 
