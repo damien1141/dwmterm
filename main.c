@@ -3297,6 +3297,7 @@ int main(int argc, char *argv[]) {
     init_default_keybindings();
     const char *opt_title = NULL;
     const char *opt_dir = NULL;
+    const char *opt_class = NULL;
     char **cmd_argv = NULL;
 
     load_config();
@@ -3349,6 +3350,14 @@ int main(int argc, char *argv[]) {
         } else if (strncmp(argv[i], "--font=", 7) == 0) {
             const char *farg = argv[i] + 7;
             snprintf(config_font_family, sizeof(config_font_family), "%s", farg);
+        } else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "--class") == 0) {
+            if (i + 1 >= argc) {
+                fprintf(stderr, "dwmterm: %s requires an argument\n", argv[i]);
+                return 1;
+            }
+            opt_class = argv[++i];
+        } else if (strncmp(argv[i], "--class=", 8) == 0) {
+            opt_class = argv[i] + 8;
         } else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--padding") == 0) {
             if (i + 1 >= argc) {
                 fprintf(stderr, "dwmterm: %s requires an argument\n", argv[i]);
@@ -3370,6 +3379,7 @@ int main(int argc, char *argv[]) {
                    "  -d, --working-directory <dir>  Set starting working directory\n"
                    "  -s, --font-size <pt>           Set font size in points (6..72, default: 12)\n"
                    "  -f, --font <family>            Set font family (e.g. 'MesloLGS Nerd Font')\n"
+                   "  -c, --class <name>             Set window class and instance name\n"
                    "  -p, --padding <px>             Set internal window padding in pixels (default: 12)\n"
                    "  -v, --version                  Display version information and exit\n"
                    "  -h, --help                     Display this help message and exit\n");
@@ -3621,8 +3631,8 @@ int main(int argc, char *argv[]) {
     atom_net_wm_pid = XInternAtom(dpy, "_NET_WM_PID", False);
 
     XClassHint class_hint;
-    class_hint.res_name = "dwmterm";
-    class_hint.res_class = "Dwmterm";
+    class_hint.res_name = (char *) (opt_class ? opt_class : "dwmterm");
+    class_hint.res_class = (char *) (opt_class ? opt_class : "Dwmterm");
     XSetClassHint(dpy, win, &class_hint);
 
     update_wm_normal_hints();
